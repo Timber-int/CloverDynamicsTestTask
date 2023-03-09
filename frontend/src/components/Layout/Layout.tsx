@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, Outlet} from 'react-router-dom';
+import {NavLink, Outlet, useNavigate} from 'react-router-dom';
 import css from './Layout.module.css';
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {boardTableActions} from "../../store";
@@ -10,7 +10,14 @@ const Layout = () => {
 
     const dispatch = useAppDispatch();
 
+    const navigate = useNavigate();
+
     const {typeOfSort, showModalWindow, showCreateTableModalWindow} = useAppSelector(state => state.boardTableReducer);
+
+    const sortByCreateAt = () => {
+        dispatch(boardTableActions.setTypeOfSort());
+        navigate('/boardTables');
+    }
 
     return (
         <>
@@ -22,7 +29,7 @@ const Layout = () => {
                     <NavLink to={'/'}>Home</NavLink>
                     <NavLink to={'/boardTables'}>Your board</NavLink>
                     <div
-                        onClick={() => dispatch(boardTableActions.setTypeOfSort())}>{typeOfSort ? 'Last' : 'First'}
+                        onClick={() => sortByCreateAt()}>{typeOfSort ? 'Last' : 'First'}
                     </div>
                 </div>
 

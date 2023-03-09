@@ -7,6 +7,7 @@
     border-radius: 1vh;
     align-items: center;
     margin: 1vh;
+    height: auto;
 }
 
 .board {
