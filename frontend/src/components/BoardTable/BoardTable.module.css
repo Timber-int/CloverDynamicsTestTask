@@ -1,0 +1,45 @@
+.board_table_box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #FFFFFF;
+    border-radius: 1vh;
+    margin: 1vh 0 1vh 0;
+    border: none;
+}
+
+.board_box {
+    border-radius: 1vh;
+    border: none;
+    padding: 1vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.data {
+    padding: 0.5vh 1vh 0.5vh 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.5vh;
+    color: #3282b8;
+}
+
+.delete_button {
+    cursor: pointer;
+    color: #0f4c75;
+}
+.delete_button:hover {
+    cursor: pointer;
+    color: #ee0505;
+}
+.title{
+    text-transform: capitalize;
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}

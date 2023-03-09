@@ -5,7 +5,8 @@ const service_1 = require("../service");
 class BoardTableController {
     async getAllBoardTables(req, res, next) {
         try {
-            const boardTables = await service_1.boardTableService.getAllBoardTables();
+            const { typeOfSort } = req.params;
+            const boardTables = await service_1.boardTableService.getAllBoardTables(typeOfSort);
             res.json({ boardTablesData: boardTables });
         }
         catch (e) {

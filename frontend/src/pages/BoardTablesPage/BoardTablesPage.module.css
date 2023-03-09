@@ -1,0 +1,7 @@
+.boards_container{
+    margin-top: 5vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

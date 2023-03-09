@@ -4,8 +4,10 @@ import {IBoardTableRepository} from "./boardTableRepositoryInterface";
 
 @EntityRepository(BoardTable)
 class BoardTableRepository extends Repository<IBoardTableRepository> {
-    public async getAllBoardTables(): Promise<IBoardTable[]> {
-        return getManager().getRepository(BoardTable).find();
+    public async getAllBoardTables(typeOfSort: string): Promise<IBoardTable[]> {
+        return getManager().getRepository(BoardTable).find({
+            order: typeOfSort === 'true' ? {createdAt: 'ASC'} : {createdAt: 'DESC'}
+        });
     }
 
     public async getBoardTableById(id: number): Promise<IBoardTable | undefined> {

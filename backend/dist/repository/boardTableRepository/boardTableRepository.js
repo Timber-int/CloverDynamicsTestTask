@@ -10,8 +10,10 @@ exports.boardTableRepository = void 0;
 const typeorm_1 = require("typeorm");
 const entity_1 = require("../../entity");
 let BoardTableRepository = class BoardTableRepository extends typeorm_1.Repository {
-    async getAllBoardTables() {
-        return (0, typeorm_1.getManager)().getRepository(entity_1.BoardTable).find();
+    async getAllBoardTables(typeOfSort) {
+        return (0, typeorm_1.getManager)().getRepository(entity_1.BoardTable).find({
+            order: typeOfSort === 'true' ? { createdAt: 'ASC' } : { createdAt: 'DESC' }
+        });
     }
     async getBoardTableById(id) {
         return (0, typeorm_1.getManager)().getRepository(entity_1.BoardTable).findOne({ id });

@@ -5,7 +5,9 @@ import {IRequestExtended} from "../interface";
 class BoardTableController {
     public async getAllBoardTables(req: IRequestExtended, res: Response, next: NextFunction): Promise<void | Error> {
         try {
-            const boardTables = await boardTableService.getAllBoardTables();
+            const {typeOfSort}= req.params;
+
+            const boardTables = await boardTableService.getAllBoardTables(typeOfSort);
 
             res.json({boardTablesData: boardTables});
         } catch (e) {

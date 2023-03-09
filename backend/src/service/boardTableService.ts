@@ -3,8 +3,8 @@ import {boardTableRepository} from "../repository";
 import {IBoardTable} from "../entity";
 
 class BoardTableService {
-    public async getAllBoardTables(): Promise<IBoardTable[]> {
-        return boardTableRepository.getAllBoardTables()
+    public async getAllBoardTables(typeOfSort :string): Promise<IBoardTable[]> {
+        return boardTableRepository.getAllBoardTables(typeOfSort)
     }
 
     public async getBoardTableById(id: number): Promise<IBoardTable | undefined> {

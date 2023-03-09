@@ -7,7 +7,7 @@ import {boardTableMiddleware} from "../middleware/boardTableMiddleware";
 
 const router = Router();
 
-router.get('/',
+router.get('/:typeOfSort',
     boardTableController.getAllBoardTables,
 );
 

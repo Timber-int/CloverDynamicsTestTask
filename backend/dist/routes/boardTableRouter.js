@@ -7,7 +7,7 @@ const middleware_1 = require("../middleware");
 const validation_1 = require("../validation");
 const boardTableMiddleware_1 = require("../middleware/boardTableMiddleware");
 const router = (0, express_1.Router)();
-router.get('/', controller_1.boardTableController.getAllBoardTables);
+router.get('/:typeOfSort', controller_1.boardTableController.getAllBoardTables);
 router.post('/', (req, res, next) => {
     req.chosenValidationType = validation_1.createBoardTableValidator;
     next();

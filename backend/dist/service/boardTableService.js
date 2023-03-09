@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.boardTableService = void 0;
 const repository_1 = require("../repository");
 class BoardTableService {
-    async getAllBoardTables() {
-        return repository_1.boardTableRepository.getAllBoardTables();
+    async getAllBoardTables(typeOfSort) {
+        return repository_1.boardTableRepository.getAllBoardTables(typeOfSort);
     }
     async getBoardTableById(id) {
         return repository_1.boardTableRepository.getBoardTableById(id);

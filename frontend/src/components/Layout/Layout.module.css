@@ -1,0 +1,37 @@
+.header {
+    width: 100%;
+    height: 10vh;
+    background-color: #0f4c75;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: snow;
+    font-size: 3vh;
+}
+
+.content_container {
+    width: 100%;
+    height: 90vh;
+    background-color: #3282b8;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+}
+
+.title {
+
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu > a, .menu > div {
+    text-decoration: none;
+    color: snow;
+    margin: 0 1vw 0 1vw;
+    cursor: pointer;
+}

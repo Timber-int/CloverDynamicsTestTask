@@ -1,0 +1,50 @@
+.board_box {
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    padding: 1vh;
+    background-color: #ddd;
+    border-radius: 1vh;
+    align-items: center;
+    margin: 1vh;
+}
+
+.board {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1vh;
+    height: 5vh;
+    align-items: center;
+}
+
+.delete_button {
+    cursor: pointer;
+    color: #0f4c75;
+}
+
+.delete_button:hover {
+    cursor: pointer;
+    color: #ee0505;
+}
+
+.board_tables_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.create_button {
+    cursor: pointer;
+    color: #0f4c75;
+}
+
+.title {
+    text-transform: capitalize;
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
