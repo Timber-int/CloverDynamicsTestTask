@@ -3,7 +3,11 @@ import axios, {AxiosError} from "axios";
 import {boardService, boardTableService} from "../../service";
 import {IBoardResponse, IBoardTable, IBoardTableResponse} from "../../interface";
 import {CONSTANTS} from "../../constants";
-import {createBoard} from "../boardSlice/boardSlice";
+
+interface IChangeBoardData {
+    id: number,
+    boardId: number,
+}
 
 export const getAllBoardTables = createAsyncThunk(
     'boardTableSlice/getAllBoardTables',
@@ -53,6 +57,24 @@ export const deleteBoardTableById = createAsyncThunk(
     }
 );
 
+export const changeBoardTableNewBoardById = createAsyncThunk(
+    'boardTableSlice/changeBoardTableNewBoardById',
+    async (changeBoardData: IChangeBoardData, {dispatch, rejectWithValue}) => {
+        try {
+            const data = await boardTableService.changeBoardTableNewBoard(changeBoardData.id, {boardId: changeBoardData.boardId});
+
+            dispatch(boardTableActions.changeBoard({boardTableData: data.boardTableData}));
+
+            return {boardTableData: data};
+        } catch (e) {
+            if (axios.isAxiosError(e)) {
+                // @ts-ignore
+                return rejectWithValue(e.response.data.message);
+            }
+        }
+    }
+);
+
 type BoardTableInitialState = {
     boardTables: IBoardTableResponse[],
     status: null | string,
@@ -62,6 +84,8 @@ type BoardTableInitialState = {
     showCreateTableModalWindow: boolean,
     boardTableDataToDelete: IBoardTableResponse | null,
     boardDataForCreateTable: IBoardResponse | null,
+    currentBoard: IBoardResponse | null,
+    currentItem: IBoardTableResponse | null,
 }
 
 const initialState: BoardTableInitialState = {
@@ -73,6 +97,8 @@ const initialState: BoardTableInitialState = {
     showCreateTableModalWindow: false,
     boardTableDataToDelete: null,
     boardDataForCreateTable: null,
+    currentBoard: null,
+    currentItem: null,
 }
 
 export const boardTableSlice = createSlice({
@@ -81,6 +107,12 @@ export const boardTableSlice = createSlice({
     reducers: {
         setTypeOfSort: (state, action: PayloadAction<void>) => {
             state.typeOfSort = !state.typeOfSort;
+        },
+        setCurrentBoard: (state, action: PayloadAction<{ board: IBoardResponse }>) => {
+            state.currentBoard = action.payload.board;
+        },
+        setCurrentItem: (state, action: PayloadAction<{ boardTable: IBoardTableResponse }>) => {
+            state.currentItem = action.payload.boardTable;
         },
         deleteBoardTable: (state, action: PayloadAction<{ boardTableData: IBoardTableResponse }>) => {
             state.boardTables = state.boardTables.filter(boardTable => boardTable.id !== action.payload.boardTableData.id);
@@ -103,6 +135,11 @@ export const boardTableSlice = createSlice({
         },
         setBoardDataForCreateTable: (state, action: PayloadAction<{ board: IBoardResponse }>) => {
             state.boardDataForCreateTable = action.payload.board;
+        },
+
+        changeBoard: (state, action: PayloadAction<{ boardTableData: IBoardTableResponse }>) => {
+            const updatedBoardTable = action.payload.boardTableData;
+            state.boardTables = state.boardTables.map(boardTable => boardTable.id === updatedBoardTable.id ? updatedBoardTable : boardTable)
         },
 
     },
@@ -171,7 +208,10 @@ const {
     setBoardTableDataToDelete,
     setShowCreateTableModalWindow,
     setBoardDataForCreateTableNull,
-    setBoardDataForCreateTable
+    setBoardDataForCreateTable,
+    setCurrentBoard,
+    setCurrentItem,
+    changeBoard,
 } = boardTableSlice.actions;
 export const boardTableActions = {
     setTypeOfSort,
@@ -181,6 +221,9 @@ export const boardTableActions = {
     setBoardTableDataToDelete,
     setShowCreateTableModalWindow,
     setBoardDataForCreateTableNull,
-    setBoardDataForCreateTable
+    setBoardDataForCreateTable,
+    setCurrentBoard,
+    setCurrentItem,
+    changeBoard,
 };
 export default boardTableReducer;

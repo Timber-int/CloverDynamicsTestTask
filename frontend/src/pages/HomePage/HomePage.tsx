@@ -35,7 +35,7 @@ const HomePage = () => {
     return (
         <div className={css.container}>
             <div className={css.information_block}>
-                Information
+                Welcome to this interesting trello
             </div>
             <div className={css.form_block}>
                 <form onSubmit={handleSubmit(submit)} className={css.form_container}>
